@@ -8,34 +8,34 @@ let create_p s =
   p
 
 let get_value_int s =
-  let v = G.number_value s in
+  let v = G.Number.value s in
   Dom.appendChild doc##.body (create_p (string_of_float v))
 
 let get_value_str s =
-  let v = G.string_value s in
+  let v = G.LString.value s in
   Dom.appendChild doc##.body (create_p v)
 
-let get_value_date (s : G.date_pattern) =
-  let utc = G.date_pattern_utc_offset s in
-  let dst = G.date_pattern_dst_offset s in
+let get_value_date (s : G.DatePattern.t) =
+  let utc = G.DatePattern.utc_offset s in
+  let dst = G.DatePattern.dts_offset s in
   let str =
-    "Pattern: " ^ (G.date_pattern s) ^ "<br />" ^
-    "Timezone: " ^ (G.date_pattern_timezone s) ^ "<br />" ^
+    "Pattern: " ^ (G.DatePattern.pattern s) ^ "<br />" ^
+    "Timezone: " ^ (G.DatePattern.timezone s) ^ "<br />" ^
     "Utc_offset: " ^ (string_of_int utc) ^ "<br />" ^
     "dst_offset: " ^ (string_of_int dst)
   in
   Dom.appendChild doc##.body (create_p str)
 
 let get_value_currency s =
-  let fraction = G.currency_pattern_fraction s in
-  let rounding = G.currency_pattern_rounding s in
+  let fraction = G.CurrencyPattern.fraction s in
+  let rounding = G.CurrencyPattern.rounding s in
   let str =
-    "Pattern: " ^ (G.currency_pattern s) ^ "<br />" ^
-    "Code: " ^ (G.currency_pattern_code s) ^ "<br />" ^
+    "Pattern: " ^ (G.CurrencyPattern.pattern s) ^ "<br />" ^
+    "Code: " ^ (G.CurrencyPattern.code s) ^ "<br />" ^
     "Fraction: " ^ (string_of_int fraction) ^ "<br />" ^
     "Rounding: " ^ (string_of_int rounding) ^ "<br />" ^
-    "Decimal: " ^ (G.currency_pattern_decimal s) ^ "<br />" ^
-    "Grouping: " ^ (G.currency_pattern_grouping s)
+    "Decimal: " ^ (G.CurrencyPattern.decimal s) ^ "<br />" ^
+    "Grouping: " ^ (G.CurrencyPattern.grouping s)
   in
   Dom.appendChild doc##.body (create_p str)
 
